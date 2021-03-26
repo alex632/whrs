@@ -1,0 +1,22 @@
+{
+  "name": "whrs",
+  "version": "1.0.0",
+  "description": "Wistron Human Resource Spider",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alex632/whrs.git"
+  },
+  "keywords": [
+    "Spider"
+  ],
+  "author": "alex_huang@wistron.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alex632/whrs/issues"
+  },
+  "homepage": "https://github.com/alex632/whrs#readme"
+}
