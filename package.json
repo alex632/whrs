@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/alex632/whrs/issues"
   },
-  "homepage": "https://github.com/alex632/whrs#readme"
+  "homepage": "https://github.com/alex632/whrs#readme",
+  "dependencies": {
+    "request": "^2.88.2",
+    "tough-cookie-filestore": "0.0.1"
+  }
 }
