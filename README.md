@@ -17,3 +17,4 @@ git clone https://github.com/alex632/whrs.git
 # Insights
     Event driven & asynchronism are good. However they are somewhat not easy to comprehend.
     Customized Web Crawler.
+    The imported module request is much better than http(s).request. However it's deprecated. What a pity! I'm a lot lagged.
