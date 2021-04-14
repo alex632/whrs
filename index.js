@@ -73,7 +73,63 @@ function procR1(html) {
             fi1[key] = m[1];
         }
     }
-    const fv1 = Object.assign({}, fi1, fx1)  
+    const fv1 = Object.assign({}, fi1, fx1);
+    return fv1;
+}
+
+// Process values from req7
+function procR7(html) {
+    let fi1 = { // form hidden/text input values
+        "ICType": "",
+        "ICElementNum": "",
+        "ICStateNum": "",
+        "ICAction": "",
+        "ICModelCancel": "",
+        "ICXPos": "",
+        "ICYPos": "",
+        "ResponsetoDiffFrame": "",
+        "TargetFrameName": "",
+        "FacetPath": "",
+        "ICFocus": "",
+        "ICSaveWarningFilter": "",
+        "ICChanged": "",
+        "ICSkipPending": "",
+        "ICAutoSave": "",
+        "ICResubmit": "",
+        "ICSID": "",
+        "ICActionPrompt": "",
+        "ICTypeAheadID": "",
+        "ICBcDomData": "",  // ????
+        "ICPanelName": "",
+        "ICFind": "",
+        "ICAddCount": "",
+        "ICAppClsData": "",
+        //"HR_DR_GROUP_VW$hnewpers$0": "",
+        "DERIVED_HR_DR_ASOFDATE": ""    // type='text' value="..."
+    };
+    let fx1 = { // form fixed values
+        "ICAJAX": "1",
+        "ICNAVTYPEDROPDOWN": "1",
+        "DERIVED_HR_DR_EMPL_RCD": "0"   // <select name='DERIVED_HR_DR_EMPL_RCD' ...>
+    };
+    for (let key in fi1) {
+        let pat = new RegExp(`<input.*?name='${key}'.*?value=['|"](.*?)['|"]`);
+        let m = pat.exec(html);
+        if (m) {
+            fi1[key] = m[1];
+        }
+    }
+    // Annoying $
+    let pat = /<input.*?name='HR_DR_GROUP_VW\$hnewpers\$0'.*?value='(.*?)'/;
+    let m = pat.exec(html);
+    if (m) {
+        //console.log('yeah!', m[0], m[1]);
+        fi1["HR_DR_GROUP_VW$hnewpers$0"] = m[1];
+    }
+    console.log(fi1);
+    fi1["ICAction"] = "SELECT_EMPLOYEE$3";    // Jack
+    // ICBcDomData 没有也可以 ?
+    const fv1 = Object.assign({}, fi1, fx1);
     return fv1;
 }
 
@@ -93,7 +149,8 @@ function req2(fv) {
 }
 
 // HTTP POST to get data
-function req8() {
+function req8(fv) {
+    /*
     let fd = "ICAJAX=1&ICNAVTYPEDROPDOWN=1&ICType=Panel&ICElementNum=0&ICStateNum=1&ICAction=SELECT_EMPLOYEE%240&ICModelCancel=0&ICXPos=0&ICYPos=0&ResponsetoDiffFrame=-1&TargetFrameName=None&FacetPath=None&ICFocus=&ICSaveWarningFilter=0&ICChanged=-1&ICSkipPending=0&ICAutoSave=0&ICResubmit=0&ICSID=2znVWanXhPm0UnZ9HDa9khgmLLWUZIK0y7rCAlOWdx0%3D&ICActionPrompt=false&ICTypeAheadID=&ICBcDomData=C~HC_GP_ABS_MGRSS_HIST_GBL~EMPLOYEE~HRMS~ROLE_MANAGER.GP_ABS_MGRSS_HIST.GBL~UnknownValue~%E8%AF%B7%E5%81%87%E8%AE%B0%E5%BD%95%E6%9F%A5%E8%AF%A2~UnknownValue~UnknownValue~https%3A%2F%2Fhr.wistron.com%2Fpsp%2FPRD%2FEMPLOYEE%2FHRMS%2Fc%2FROLE_MANAGER.GP_ABS_MGRSS_HIST.GBL~UnknownValue*F~HC_VIEW_TIME_MGR~EMPLOYEE~HRMS~UnknownValue~UnknownValue~%E9%83%A8%E5%B1%9E%E7%94%B3%E8%AF%B7%E8%AE%B0%E5%BD%95%E6%9F%A5%E8%AF%A2~UnknownValue~UnknownValue~https%3A%2F%2Fhr.wistron.com%2Fpsp%2FPRD%2FEMPLOYEE%2FHRMS%2Fs%2FWEBLIB_PT_NAV.ISCRIPT1.FieldFormula.IScript_PT_NAV_INFRAME%3Fpt_fname%3DHC_VIEW_TIME_MGR%26c%3DnT2qZk55zeTkVdGCn7%252fwqZ7uQ1R71R0f%26FolderPath%3DPORTAL_ROOT_OBJECT.CO_MANAGER_SELF_SERVICE.HC_TIME_MANAGEMENT.HC_VIEW_TIME_MGR%26IsFolder%3Dtrue~UnknownValue*F~HC_TIME_MANAGEMENT~EMPLOYEE~HRMS~UnknownValue~UnknownValue~%E8%80%83%E5%8B%A4%E7%AE%A1%E7%90%86~UnknownValue~UnknownValue~https%3A%2F%2Fhr.wistron.com%2Fpsp%2FPRD%2FEMPLOYEE%2FHRMS%2Fs%2FWEBLIB_PT_NAV.ISCRIPT1.FieldFormula.IScript_PT_NAV_INFRAME%3Fpt_fname%3DHC_TIME_MANAGEMENT%26c%3DnT2qZk55zeTkVdGCn7%252fwqZ7uQ1R71R0f%26FolderPath%3DPORTAL_ROOT_OBJECT.CO_MANAGER_SELF_SERVICE.HC_TIME_MANAGEMENT%26IsFolder%3Dtrue~UnknownValue*F~CO_MANAGER_SELF_SERVICE~EMPLOYEE~HRMS~UnknownValue~UnknownValue~%E7%BB%8F%E7%90%86%E8%87%AA%E5%8A%A9%E6%9C%8D%E5%8A%A1~UnknownValue~UnknownValue~https%3A%2F%2Fhr.wistron.com%2Fpsp%2FPRD%2FEMPLOYEE%2FHRMS%2Fs%2FWEBLIB_PT_NAV.ISCRIPT1.FieldFormula.IScript_PT_NAV_INFRAME%3Fpt_fname%3DCO_MANAGER_SELF_SERVICE%26c%3DnT2qZk55zeTkVdGCn7%252fwqZ7uQ1R71R0f%26FolderPath%3DPORTAL_ROOT_OBJECT.CO_MANAGER_SELF_SERVICE%26IsFolder%3Dtrue~UnknownValue&ICPanelName=&ICFind=&ICAddCount=&ICAppClsData=&HR_DR_GROUP_VW$hnewpers$0=0%7C0%7C0%7C0%7C0%7C0%7C0%231%7C0%7C0%7C0%7C0%7C0%7C0%232%7C0%7C0%7C0%7C0%7C0%7C0%23&DERIVED_HR_DR_ASOFDATE=2021%2F04%2F08&DERIVED_HR_DR_EMPL_RCD=0";
     let options = {
         url: "https://hr.wistron.com/psc/PRD/EMPLOYEE/HRMS/c/ROLE_MANAGER.GP_ABS_MGRSS_HIST.GBL",
@@ -104,12 +161,14 @@ function req8() {
             'User-Agent': 'Alexander the great.',
             "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: fd
+        //body: fd,
+        form: fv
         //followAllRedirects: true
     }
-    require('request-debug')(request);
+    */
+    //require('request-debug')(request);
     //require('request').debug = true;
-    request.post(options, (error, response, body)=>{
+    request.post("https://hr.wistron.com/psc/PRD/EMPLOYEE/HRMS/c/ROLE_MANAGER.GP_ABS_MGRSS_HIST.GBL", {form:fv}, (error, response, body)=>{
         if (error) {
             console.error('r8 error:', error); // Print the error if one occurred
         } else {
@@ -200,7 +259,8 @@ function req7(url) {
                     break;
                 }
             }
-            //req8();
+            //procR7(body);
+            req8(procR7(body));
         }
     });
 }
