@@ -53,7 +53,7 @@ function dumpHeader(rsp, fn) {
 
 // Process values from req1
 function procR1(html) {
-    let fi1 = { // form input values
+    let fi1 = { // form hidden input values
         "lcsrf_token": "",
         "timezoneOffset": "",
         "ptmode": "",
@@ -127,7 +127,7 @@ function procR7(html) {
         fi1["HR_DR_GROUP_VW$hnewpers$0"] = m[1];
     }
     console.log(fi1);
-    fi1["ICAction"] = "SELECT_EMPLOYEE$3";    // Jack
+    fi1["ICAction"] = "SELECT_EMPLOYEE$3";    // Pony
     // ICBcDomData 没有也可以 ?
     const fv1 = Object.assign({}, fi1, fx1);
     return fv1;
@@ -143,7 +143,7 @@ function req2(fv) {
             dumpHeader(response, 'tmp/r2-hdr.txt');  //DEBUG
             //req3();
             //req5();
-            req7("https://hr.wistron.com/psc/PRD/EMPLOYEE/HRMS/c/ROLE_MANAGER.GP_ABS_MGRSS_HIST.GBL?NAVSTACK=Clear&PORTALPARAM_PTCNAV=HC_GP_ABS_MGRSS_HIST_GBL&EOPP.SCNode=HRMS&EOPP.SCPortal=EMPLOYEE&EOPP.SCName=ADMN_MANAGER_REVIEWS&EOPP.SCLabel=%e9%83%a8%e5%b1%9e%e7%94%b3%e8%af%b7%e8%ae%b0%e5%bd%95%e6%9f%a5%e8%af%a2&EOPP.SCFName=ADMN_F201512302128141443830683&EOPP.SCSecondary=true&EOPP.SCPTcname=PT_PTPP_SCFNAV_BASEPAGE_SCR&FolderPath=PORTAL_ROOT_OBJECT.CO_MANAGER_SELF_SERVICE.HC_TIME_MANAGEMENT.HC_VIEW_TIME_MGR.HC_GP_ABS_MGRSS_HIST_GBL&IsFolder=false&PortalActualURL=https%3a%2f%2fhr.wistron.com%2fpsc%2fPRD%2fEMPLOYEE%2fHRMS%2fc%2fROLE_MANAGER.GP_ABS_MGRSS_HIST.GBL%3fNAVSTACK%3dClear&PortalContentURL=https%3a%2f%2fhr.wistron.com%2fpsc%2fPRD%2fEMPLOYEE%2fHRMS%2fc%2fROLE_MANAGER.GP_ABS_MGRSS_HIST.GBL%3fNAVSTACK%3dClear&PortalContentProvider=HRMS&PortalCRefLabel=%e8%af%b7%e5%81%87%e8%ae%b0%e5%bd%95%e6%9f%a5%e8%af%a2&PortalRegistryName=EMPLOYEE&PortalServletURI=https%3a%2f%2fhr.wistron.com%2fpsp%2fPRD%2f&PortalURI=https%3a%2f%2fhr.wistron.com%2fpsc%2fPRD%2f&PortalHostNode=HRMS&NoCrumbs=yes&PortalKeyStruct=yes");
+            req7();
         }
     });
 }
@@ -230,7 +230,9 @@ function req5() {
 }
 
 // 主管自助服务 - 部属申请记录查询 - 请假记录查询 - 直接报告者用户界面
-function req7(url) {
+function req7() {
+    let url = "https://hr.wistron.com/psc/PRD/EMPLOYEE/HRMS/c/ROLE_MANAGER.GP_ABS_MGRSS_HIST.GBL?NAVSTACK=Clear&PORTALPARAM_PTCNAV=HC_GP_ABS_MGRSS_HIST_GBL&EOPP.SCNode=HRMS&EOPP.SCPortal=EMPLOYEE&EOPP.SCName=ADMN_MANAGER_REVIEWS&EOPP.SCLabel=%e9%83%a8%e5%b1%9e%e7%94%b3%e8%af%b7%e8%ae%b0%e5%bd%95%e6%9f%a5%e8%af%a2&EOPP.SCFName=ADMN_F201512302128141443830683&EOPP.SCSecondary=true&EOPP.SCPTcname=PT_PTPP_SCFNAV_BASEPAGE_SCR&FolderPath=PORTAL_ROOT_OBJECT.CO_MANAGER_SELF_SERVICE.HC_TIME_MANAGEMENT.HC_VIEW_TIME_MGR.HC_GP_ABS_MGRSS_HIST_GBL&IsFolder=false&PortalActualURL=https%3a%2f%2fhr.wistron.com%2fpsc%2fPRD%2fEMPLOYEE%2fHRMS%2fc%2fROLE_MANAGER.GP_ABS_MGRSS_HIST.GBL%3fNAVSTACK%3dClear&PortalContentURL=https%3a%2f%2fhr.wistron.com%2fpsc%2fPRD%2fEMPLOYEE%2fHRMS%2fc%2fROLE_MANAGER.GP_ABS_MGRSS_HIST.GBL%3fNAVSTACK%3dClear&PortalContentProvider=HRMS&PortalCRefLabel=%e8%af%b7%e5%81%87%e8%ae%b0%e5%bd%95%e6%9f%a5%e8%af%a2&PortalRegistryName=EMPLOYEE&PortalServletURI=https%3a%2f%2fhr.wistron.com%2fpsp%2fPRD%2f&PortalURI=https%3a%2f%2fhr.wistron.com%2fpsc%2fPRD%2f&PortalHostNode=HRMS&NoCrumbs=yes&PortalKeyStruct=yes";
+    // https://hr.wistron.com/psc/PRD/EMPLOYEE/HRMS/c/ROLE_MANAGER.GP_ABS_MGRSS_HIST.GBL?NAVSTACK=Clear&PORTALPARAM_PTCNAV=HC_GP_ABS_MGRSS_HIST_GBL&EOPP.SCNode=HRMS&EOPP.SCPortal=EMPLOYEE&EOPP.SCName=ADMN_MANAGER_REVIEWS&EOPP.SCLabel=部属申请记录查询&EOPP.SCFName=ADMN_F201512302128141443830683&EOPP.SCSecondary=true&EOPP.SCPTcname=PT_PTPP_SCFNAV_BASEPAGE_SCR&FolderPath=PORTAL_ROOT_OBJECT.CO_MANAGER_SELF_SERVICE.HC_TIME_MANAGEMENT.HC_VIEW_TIME_MGR.HC_GP_ABS_MGRSS_HIST_GBL&IsFolder=false&PortalActualURL=https://hr.wistron.com/psc/PRD/EMPLOYEE/HRMS/c/ROLE_MANAGER.GP_ABS_MGRSS_HIST.GBL?NAVSTACK=Clear&PortalContentURL=https://hr.wistron.com/psc/PRD/EMPLOYEE/HRMS/c/ROLE_MANAGER.GP_ABS_MGRSS_HIST.GBL?NAVSTACK=Clear&PortalContentProvider=HRMS&PortalCRefLabel=请假记录查询&PortalRegistryName=EMPLOYEE&PortalServletURI=https://hr.wistron.com/psp/PRD/&PortalURI=https://hr.wistron.com/psc/PRD/&PortalHostNode=HRMS&NoCrumbs=yes&PortalKeyStruct=yes
     request(url, (error, response, body)=>{
         if (error) {
             console.error('r7 error:', error);
