@@ -15,6 +15,6 @@ git clone https://github.com/alex632/whrs.git
 > node index.js
 
 # Insights
-    Event driven & asynchronism are good. However they are somewhat not easy to comprehend.
     Customized Web Crawler.
-    The imported module request is much better than http(s).request. However it's deprecated. What a pity! I'm a lot lagged.
+    The imported module request is much better than http(s).request. However it's deprecated. What a pity! I lagged behind a lot.
+    Chrome devtools is excellent.
